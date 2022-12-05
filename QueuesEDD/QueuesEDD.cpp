@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include <conio.h>
 #include <string>
 #include <stdlib.h>
 using namespace std;
@@ -27,8 +28,8 @@ string ValidarNumero(string str)
 struct Nodo
 {
 	string dato;
-	Nodo* siguiente;
-	int priority;
+	Nodo* siguiente{};
+	int priority{};
 };
 
 
