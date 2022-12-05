@@ -25,11 +25,11 @@ string ValidarNumero(string str)
 	return str; //devuelve un str igual si no se encontraron letras
 }
 
-
 struct Nodo
 {
 	string dato;
 	Nodo* siguiente;
+	int priority;
 };
 
 
@@ -38,11 +38,12 @@ bool emptyqueues(Nodo* front)  //valida si esta vacio
 	return (front == NULL);
 }
 
-void Enqueue(Nodo*& front, Nodo*& last, string n)
+void Enqueue(Nodo*& front, Nodo*& last, int priority, string n)
 {
 	Nodo* nuevo_nodo = new Nodo();
 
 	nuevo_nodo->dato = n;
+	nuevo_nodo->priority = priority;
 	nuevo_nodo->siguiente = NULL;
 
 	if (emptyqueues(front)) //si cumple con la funcion 
@@ -51,10 +52,25 @@ void Enqueue(Nodo*& front, Nodo*& last, string n)
 	}
 	else
 	{
-		last->siguiente = nuevo_nodo;
+		for (Nodo* aux = front; aux != NULL; aux = aux->siguiente) {
+			if (aux->priority > nuevo_nodo->priority) {
+				front = nuevo_nodo;
+				nuevo_nodo->siguiente = aux;
+			}
+			else if (aux->siguiente == NULL) {
+				aux->siguiente = nuevo_nodo;
+				last = nuevo_nodo;
+				nuevo_nodo->siguiente = NULL;
+			}
+			else if (aux->siguiente->priority > priority) {
+				nuevo_nodo->siguiente = aux->siguiente;
+				aux->siguiente = nuevo_nodo;
+			}
+			break;
+		}
+
 	}
-	last = nuevo_nodo;
-	cout << "Elemento " << n << " Agregado con exito" << endl;
+	cout << "Elemento " << n << " a	gregado con exito" << endl;
 }
 
 void Dequeue(Nodo*& front, Nodo*& last, string& n)
@@ -77,14 +93,22 @@ void Dequeue(Nodo*& front, Nodo*& last, string& n)
 
 int main()
 {
+
 	string dato;
+
+	Nodo* siguiente = NULL;
+
+	string priority;
+	int priorityInt = 16;
+
 	Nodo* front = NULL;
 	Nodo* last = NULL;
+
 	string opcion;
 	int opcionInt = 0;
 
-	while (opcionInt != 4) {
-		cout << "Seleccione la opcion que desea ejecutar:\n(1)Enqueue\n(2)Dequeue\n(3)Mostrar datos (Dequeue de toda la cola)" << endl;
+	while (opcionInt != 5) {
+		cout << "Seleccione la opcion que desea ejecutar:\n(1)Enqueue\n(2)Dequeue\n(3)Mostrar datos (Dequeue de toda la cola)\n>>";
 		cin >> opcion;
 
 		opcionInt = ValidarNumero(opcion) == opcion ? stoi(opcion) : -1;
@@ -93,11 +117,49 @@ int main()
 		case 1:
 			cout << "Escriba la cadena que desea insertar en la cola: ";
 			cin >> dato;
+			cout << "Escriba la prioridad que tendra la cadena: ";
+			cin >> priority;
+			
+			if (ValidarNumero(priority) == priority) priorityInt = stoi(priority);
+			else {
+				cout << "Prioridad invalida, inserte solo numeros por favor" << endl;
+				break;
+			}
+				
+			if (priorityInt > 16) priorityInt = 16;
 
-			Enqueue(front, last, dato);
+			Enqueue(front, last, priorityInt, dato);
+
 			break;
 		case 2:
-			
+			if (front != NULL) {
+				cout << "Valor eliminado: " << dato << endl;
+				Dequeue(front, last, dato);
+			}
+			else cout << "La cola esta vacia, inserte valores" << endl;
+			break;
+
+		case 3:
+			if (front != NULL) {
+				while (front != NULL)
+				{
+					Dequeue(front, last, dato);
+
+					if (front != NULL) cout << dato << "  ,  ";
+					else cout << dato << ".\n";
+				}
+			}
+			else cout << "La cola esta vacia, inserte valores" << endl;
+
+			break;
+
+		case 4:
+			for (Nodo* aux = front; aux != NULL; aux = aux->siguiente) {
+				cout << "dato: " << aux->dato << "; prioridad: " << aux->priority << endl;
+			}
+			break;
+		default:
+			cout << "Valor invalido introducido, solo se permiten numeros entre el 1 y el 3" << endl;
 			break;
 		}
 		system("PAUSE");
