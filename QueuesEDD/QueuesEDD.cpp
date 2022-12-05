@@ -46,9 +46,11 @@ void Enqueue(Nodo*& front, Nodo*& last, int priority, string n)
 	nuevo_nodo->priority = priority;
 	nuevo_nodo->siguiente = NULL;
 
+
 	if (emptyqueues(front)) //si cumple con la funcion 
 	{
 		front = nuevo_nodo;
+		last = nuevo_nodo;
 	}
 	else
 	{
@@ -56,21 +58,22 @@ void Enqueue(Nodo*& front, Nodo*& last, int priority, string n)
 			if (aux->priority > nuevo_nodo->priority) {
 				front = nuevo_nodo;
 				nuevo_nodo->siguiente = aux;
+				break;
 			}
 			else if (aux->siguiente == NULL) {
 				aux->siguiente = nuevo_nodo;
 				last = nuevo_nodo;
-				nuevo_nodo->siguiente = NULL;
+				break;
 			}
 			else if (aux->siguiente->priority > priority) {
 				nuevo_nodo->siguiente = aux->siguiente;
 				aux->siguiente = nuevo_nodo;
+				break;
 			}
-			break;
 		}
 
 	}
-	cout << "Elemento " << n << " a	gregado con exito" << endl;
+	cout << "Elemento " << n << " agregado con exito" << endl;
 }
 
 void Dequeue(Nodo*& front, Nodo*& last, string& n)
@@ -119,13 +122,13 @@ int main()
 			cin >> dato;
 			cout << "Escriba la prioridad que tendra la cadena: ";
 			cin >> priority;
-			
+
 			if (ValidarNumero(priority) == priority) priorityInt = stoi(priority);
 			else {
 				cout << "Prioridad invalida, inserte solo numeros por favor" << endl;
 				break;
 			}
-				
+
 			if (priorityInt > 16) priorityInt = 16;
 
 			Enqueue(front, last, priorityInt, dato);
@@ -133,7 +136,7 @@ int main()
 			break;
 		case 2:
 			if (front != NULL) {
-				cout << "Valor eliminado: " << dato << endl;
+				cout << "Valor eliminado: " << front->dato << endl;
 				Dequeue(front, last, dato);
 			}
 			else cout << "La cola esta vacia, inserte valores" << endl;
