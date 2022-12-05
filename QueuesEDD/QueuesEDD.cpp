@@ -146,7 +146,7 @@ int main()
 			break;
 		case 2: //Dequeue
 
-			if (!emptyqueues(front)) {
+			if (front != NULL) { //si la cola no esta vacia, realizar dequeue
 				cout << "Valor eliminado: " << front->dato << endl;
 				Dequeue(front, last, dato);
 			}
