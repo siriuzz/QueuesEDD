@@ -54,7 +54,7 @@ void Enqueue(Nodo*& front, Nodo*& last, int priority, string n)
 	Nodo* nuevo_nodo = new Nodo(); //apartar el espacio en memoria
 	nuevo_nodo->dato = n; //asignar la el dato al nodo creado
 	nuevo_nodo->priority = priority; //asignar la prioridad al nuevo nodo
-	nuevo_nodo->siguiente = NULL; //
+	nuevo_nodo->siguiente = NULL;
 
 
 	if (emptyqueues(front)) //si la cola esta vacia
@@ -67,7 +67,7 @@ void Enqueue(Nodo*& front, Nodo*& last, int priority, string n)
 		//bucle que itera por cada nodo de la cola
 		for (Nodo* aux = front; aux != NULL; aux = aux->siguiente) {
 			//si la prioridad del primer elemento es mayor a la prioridad del nuevo nodo
-			if (aux->priority > nuevo_nodo->priority) {
+			if (aux->priority > priority) {
 				front = nuevo_nodo;
 				nuevo_nodo->siguiente = aux;
 				break;
@@ -111,9 +111,7 @@ void Dequeue(Nodo*& front, Nodo*& last, string& n)
 int main()
 {
 	//parametros de los nodos
-	string dato;
-
-	string priority;
+	string dato, priority;
 	int priorityInt = 16;
 
 	//punteros de la cola
