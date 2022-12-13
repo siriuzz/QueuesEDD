@@ -1,13 +1,16 @@
-// Enunciado: Realizar un programa en C++ que simule una cola.
-// 
-// Participantes:
-// 1- John Luis Del Rosario Sánchez - ID 1106940
-// 2- Ashly Marisell Paula Ynoa - ID 1108023
-// 3- Elián Matos Díaz - ID 1106901
-// 4- Juan Daniel Ubiera Méndez - ID 1107248
-// 5- Kelvin Arístides García Espinal - ID 1107646
-//
-// Fecha de entrega: 5/12/2022
+/*
+Enunciado: Realizar un programa en C++ que simule una cola.
+
+Participantes:
+1- John Luis Del Rosario Sánchez - ID 1106940
+2- Ashly Marisell Paula Ynoa - ID 1108023
+3- Elián Matos Díaz - ID 1106901
+4- Juan Daniel Ubiera Méndez - ID 1107248
+5- Kelvin Arístides García Espinal - ID 1107646
+
+Fecha de entrega: 5/12/2022
+*/
+
 
 #include <iostream>
 #include <conio.h>
@@ -163,9 +166,10 @@ int main()
 			if (front != NULL) {
 				while (front != NULL)
 				{
-					cout << "Valor eliminado: " << front->dato << endl;
+					cout << "|" << front->dato << "[" << front->priority << "]|" << "->";
 					Dequeue(front, last, dato);
 				}
+				cout << " NULL" << endl;
 			}
 			else cout << "La cola esta vacia, inserte valores" << endl;
 
