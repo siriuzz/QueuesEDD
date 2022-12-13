@@ -128,7 +128,7 @@ int main()
 	//menu
 	while (opcionInt != 5) {
 		//opciones
-		cout << "Seleccione la opcion que desea ejecutar:\n(1)Enqueue\n(2)Dequeue\n(3)Mostrar datos (Dequeue de toda la cola)\n>>";
+		cout << "Seleccione la opcion que desea ejecutar:\n(1)Enqueue\n(2)Dequeue\n(3)Mostrar datos (Dequeue de toda la cola)\n(4)Salir\n>>";
 		cin >> opcion;
 
 		//asignar valor dependiendo si es numero o no
@@ -176,10 +176,8 @@ int main()
 			break;
 
 		case 4:
-			for (Nodo* aux = front; aux != NULL; aux = aux->siguiente) {
-				cout << "dato: " << aux->dato << "; prioridad: " << aux->priority << endl;
-			}
-			break;
+			cout << "Adios!" << endl;
+			exit(0);
 		default: //
 			cout << "Valor invalido introducido, solo se permiten numeros entre el 1 y el 3" << endl;
 			break;
