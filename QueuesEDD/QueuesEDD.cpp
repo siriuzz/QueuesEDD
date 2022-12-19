@@ -18,6 +18,18 @@ Fecha de entrega: 5/12/2022
 #include <stdlib.h>
 using namespace std;
 
+#pragma region Nodo
+
+//declaracion de la estructura Nodo
+struct Nodo
+{
+	string dato;
+	Nodo* siguiente{};//declaracion default
+	int priority{};//declaracion default
+};
+#pragma endregion
+
+#pragma region Validador
 //Valida que el str contenga solo numeros
 string ValidarNumero(string str)
 {
@@ -36,13 +48,9 @@ string ValidarNumero(string str)
 	return str; //devuelve un str igual si no se encontraron letras
 }
 
-//declaracion de la estructura Nodo
-struct Nodo
-{
-	string dato;
-	Nodo* siguiente{};//declaracion default
-	int priority{};//declaracion default
-};
+#pragma endregion
+
+#pragma region Funciones
 
 //funcion que evalua si la funcion esta vacia o no
 bool emptyqueues(Nodo* front)  //valida si esta vacio
@@ -110,6 +118,7 @@ void Dequeue(Nodo*& front, Nodo*& last, string& n)
 	}
 	delete aux;
 }
+#pragma endregion
 
 int main()
 {
@@ -178,8 +187,8 @@ int main()
 		case 4:
 			cout << "Adios!" << endl;
 			exit(0);
-		default: //
-			cout << "Valor invalido introducido, solo se permiten numeros entre el 1 y el 3" << endl;
+		default: //cuando no son numeros del 1 al 4
+			cout << "Valor invalido introducido, solo se permiten numeros entre el 1 y el 4" << endl;
 			break;
 		}
 		system("PAUSE");
